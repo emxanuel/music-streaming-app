@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const FormLogin = () => {
     return (
-        <form action="" className='w-3/12 flex flex-col items-center gap-5'>
+        <form action="" className='w-80 md:py-40 flex flex-col items-center gap-5'>
             <h1 className='text-3xl'>Log in to your account</h1>
             <Input type='email' label='email' />
             <Input type='password' label='password' />

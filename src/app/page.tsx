@@ -1,9 +1,10 @@
-import Image from 'next/image'
+import Main from "@/components/Main"
+import Link from "next/link"
 
 export default function Home() {
     return (
         <div>
-            <h1>Welcome</h1>
+            <Main />
         </div>
     )
 }
