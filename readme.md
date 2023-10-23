@@ -92,24 +92,24 @@
 ```
 
 * **Playlist object**
-    ```typescript
-        interface IPlaylist{
-            name: string,
-            owner: {
-                id: string,
-                username: string
+```typescript
+    interface IPlaylist{
+        name: string,
+        owner: {
+            id: string,
+            username: string
+        },
+        createDate: Date(),
+        songs: {
+            title: string,
+            artist: {
+                name: string,
+                link: string
             },
-            createDate: Date(),
-            songs: {
-                title: string,
-                artist: {
-                    name: string,
-                    link: string
-                },
-                album: {
-                    name: string,
-                    link: string
-                }
+            album: {
+                name: string,
+                link: string
             }
         }
-    ```
+    }
+```
