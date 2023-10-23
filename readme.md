@@ -1,7 +1,7 @@
 # Sound Wave API Documentation
 
 ## Endpoints
-* users
+* Users
     * Get all users
     ```javascript
         fetch(`${origin}/api/users`)
@@ -32,3 +32,16 @@
             method: 'DELETE',
         )
     ```
+
+# Responses
+* User object
+```typescript
+    interface IUser{
+        firstName: string,
+        lastName: string,
+        username: string,
+        email: string,
+        phone: string,
+        country: string.
+    }
+```
