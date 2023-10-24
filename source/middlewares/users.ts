@@ -8,7 +8,6 @@ import {
     updateUserById,
 } from "../models/users";
 import { IUser } from "../types";
-import { toHex24 } from "../functions/main";
 
 const getAllUsers = async (_: Request, res: Response) => {
     try {
@@ -25,7 +24,7 @@ const getSingleUser = async (req: Request, res: Response) => {
         if (req.query.id) {
             try {
                 user = (await getUserById(
-                    toHex24(req.query.id.toString())
+                    req.query.id.toString()
                 )) as IUser;
             } catch {
                 res.sendStatus(500).json({ message: "Incorrect value" });

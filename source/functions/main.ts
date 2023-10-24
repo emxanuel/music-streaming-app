@@ -1,14 +1,11 @@
-function toHex24(value: string): string {
-    const regex = /^[0-9a-fA-F]$/
-    if (typeof value === 'string' && regex.test(value)) {
-        return value;
-    } else if(typeof value === 'string' && !regex.test(value)){
-        return value.padStart(24, '0').toString()
-    } else {
-        return '';
-    }
+import crypto from 'crypto'
+
+function sha256(value: string): string {
+    const hash = crypto.createHash('sha256')
+    hash.update(value)
+    return hash.digest('hex')
 }
 
 export {
-    toHex24
+    sha256
 }
