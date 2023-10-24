@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPlaylist, deletePlaylistById, getPlaylistsByUser, updatePlaylistById } from "../middlewares/playlists";
+import { createPlaylist, deletePlaylistById, getPlaylistsByUser, updatePlaylistById } from "../middlewares/playlists.middlewares";
 const playlistsRouter = Router()
 
 playlistsRouter.get('/:userId', getPlaylistsByUser)

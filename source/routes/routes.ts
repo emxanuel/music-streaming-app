@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
-import usersRouter, { route } from './users'
-import { playlistsRouter } from './playlists'
+import usersRouter, { route } from './users.routes'
+import { playlistsRouter } from './playlists.routes'
 
 router.get('/api', (req, res) => {
     res.send('Welcome')

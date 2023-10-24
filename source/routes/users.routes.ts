@@ -5,7 +5,7 @@ import {
     getAllUsers,
     getSingleUser,
     updateUser
-} from '../middlewares/users'
+} from '../middlewares/users.middlewares'
 const usersRouter = express.Router()
 
 usersRouter.get('/', getAllUsers)
