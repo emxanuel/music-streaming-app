@@ -3,6 +3,7 @@ interface IUser {
     lastName: string;
     username: string;
     email: string;
+    password: string
     phone: string;
     country: string;
 }

@@ -8,6 +8,7 @@ import {
     updateUserById,
 } from "../models/users";
 import { IUser } from "../types";
+import { sha256 } from "../functions/main";
 
 const getAllUsers = async (_: Request, res: Response) => {
     try {
@@ -46,7 +47,8 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     try {
-        const user = req.body;
+        const user = req.body as IUser;
+        user.password = sha256(user.password)
         const addedUser = await addUser(user);
         res.json(addedUser);
     } catch (e) {
