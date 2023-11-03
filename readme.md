@@ -113,13 +113,7 @@
         //or
         fetch(`${origin}/api/songs?artist=${artist}&page=${page}`);
         ```
-
-    -   **Get Songs By Genre**
-        ```javascript
-        fetch(`${origin}/api/songs?genre=${genre}`);
-        //or
-        fetch(`${origin}/api/songs?genre=${genre}&page=${page}`);
-        ```
+        
     -   **Get User Favorite Songs**
         ```javascript
         fetch(`${origin}/api/songs?user=${userId}`);

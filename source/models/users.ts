@@ -37,6 +37,7 @@ const addUser = (value: Record<string,  any>) => new UserModel(value)
     .save().then(user => user.toObject())
 const deleteUserById = (id: string) => UserModel.findOneAndDelete({_id: id})
 const updateUserById = (id: string, user: IUser) => UserModel.findOneAndUpdate({_id: id}, user)
+const verifyUser = (username: string, password: string) => UserModel.findOne({username: username, password: password})
 
 export { 
     UserModel, 
@@ -45,5 +46,6 @@ export {
     getUserByEmail,
     addUser,
     deleteUserById,
-    updateUserById
+    updateUserById,
+    verifyUser
 };
