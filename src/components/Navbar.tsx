@@ -11,6 +11,7 @@ import {
     NavbarMenu,
     NavbarMenuItem
 } from "@nextui-org/react";
+import { useUserContext } from '@/contexts/UserContext';
 
 const menuItems = [
     {
@@ -24,11 +25,12 @@ const menuItems = [
 ]
 
 const Navbar = () => {
+    const {user} = useUserContext()
     return (
-        <Nav className='border-b-2 border-b-neutral-500'>
+        <Nav className={`border-b-2 border-b-neutral-500 ${user.username === ''? 'block' : 'hidden'}`}>
             <NavbarMenuToggle className='md:hidden'></NavbarMenuToggle>
             <NavbarBrand>
-                <h1 className='text-2xl'>SoundWave</h1>
+                <Link href={'/'}><h1 className='text-2xl'>SoundWave</h1></Link>
             </NavbarBrand>
             <NavbarContent className='hidden md:flex md:justify-center items-center justify-center gap-40'>
                 {
