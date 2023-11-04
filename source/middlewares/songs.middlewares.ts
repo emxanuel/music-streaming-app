@@ -16,8 +16,19 @@ const getSongs = async (req: Request, res: Response) => {
                 res.json(request.data.data)
             }
         }
-
-        
+        if (req.query.album){
+            const request = await axios.request({
+                method: 'GET',
+                url: `${process.env.API_URL}/search/album`,
+                params: {
+                    q: req.query.album
+                }
+            })
+            
+            if (request.status === 200){
+                res.json(request.data.data)
+            }
+        }
 
     }
     catch(e){
