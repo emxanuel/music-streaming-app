@@ -39,13 +39,13 @@ const reducer = (state: userState, action: userActions) => {
 }
 
 const UserProvider: React.FC<IProps> = ({ children }) => {
+    const [user, userDispatch] = useReducer(reducer, {...emptyUser, _id: '0'})
     useEffect(() => {
         const userJSON = localStorage.getItem('user');
         const savedUser = userJSON ? JSON.parse(userJSON) : emptyUser;
-        userDispatch({type: Actions.SET_USER, payload: savedUser})
+        userDispatch({ type: Actions.SET_USER, payload: savedUser })
     }, [])
-    
-    const [user, userDispatch] = useReducer(reducer, emptyUser)
+
 
     const setUser = (user: userState) => {
         userDispatch({ type: Actions.SET_USER, payload: user })

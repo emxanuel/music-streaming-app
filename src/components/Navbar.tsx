@@ -8,8 +8,6 @@ import {
     NavbarContent,
     NavbarItem,
     NavbarMenuToggle,
-    NavbarMenu,
-    NavbarMenuItem
 } from "@nextui-org/react";
 import { useUserContext } from '@/contexts/UserContext';
 
@@ -27,7 +25,7 @@ const menuItems = [
 const Navbar = () => {
     const {user} = useUserContext()
     return (
-        <Nav className={`border-b-2 border-b-neutral-500 ${user.username === ''? 'block' : 'hidden'}`}>
+        <Nav className={`border-b-2 border-b-neutral-500 ${user._id === ''? 'block' : 'hidden'}`}>
             <NavbarMenuToggle className='md:hidden'></NavbarMenuToggle>
             <NavbarBrand>
                 <Link href={'/'}><h1 className='text-2xl'>SoundWave</h1></Link>

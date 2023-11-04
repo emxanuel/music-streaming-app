@@ -15,6 +15,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useUserContext } from '@/contexts/UserContext'
+import Sidebar from './Sidebar'
 
 const images = [
     {
@@ -46,7 +47,7 @@ const images = [
 const Main = () => {
     const { user } = useUserContext()
     return (
-        user.username === '' ? (
+        user._id === '' ? (
             <div className=''>
                 <div className="flex justify-around px-20 py-44 items-center bg-white bg-opacity-5">
                     <div className='flex flex-col items-center gap-8'>
@@ -78,9 +79,13 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-        ) : (
+        ) : user._id === '0'? (
             <div>
-                
+                Loading
+            </div>
+        ) : (
+            <div className='flex h-screen'>
+                <Sidebar />
             </div>
         )
     )

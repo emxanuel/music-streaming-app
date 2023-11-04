@@ -7,7 +7,7 @@ import { useUserContext } from '@/contexts/UserContext'
 const Footer = () => {
     const {user} = useUserContext()
     return (
-        <div className={`flex flex-col md:flex-row items-center ${user && user.username === ''? 'block' : 'hidden'}`}>
+        <div className={`flex flex-col md:flex-row items-center ${user._id === ''? 'block' : 'hidden'}`}>
             <div className='md:w-1/2 w-full  flex flex-col items-center h-72'>
                 <h2 className='text-2xl py-10'>Social Media</h2>
                 <ul className='flex flex-col items-center gap-3'>
