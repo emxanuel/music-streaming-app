@@ -4,7 +4,7 @@
   "description": "api for soundwave",
   "main": "source/server.ts",
   "compilerOptions": {
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "scripts": {
     "dev": "nodemon source/server.ts",
