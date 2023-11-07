@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "api for soundwave",
   "main": "source/server.ts",
-  "type": "module",
-  "compilerOptions": {
-    "esModuleInterop": true
-  },
   "scripts": {
     "dev": "nodemon source/server.ts",
     "build": "powershell rm -r build/ && prettier --write source/ && tsc",
