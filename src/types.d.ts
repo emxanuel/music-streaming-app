@@ -24,6 +24,21 @@ type TArtist = {
     tracklist: string;
 }
 
+type TAlbum = {
+    id: number;
+    title: string;
+    link: string;
+    share: string;
+    cover: string;
+    cover_small: string;
+    cover_medium: string;
+    cover_big: string;
+    cover_xl: string;
+    duration: string;
+    artist: string;
+    tracks: TSong[];
+}
+
 type TSong = {
     title: string;
     link: string;
@@ -31,11 +46,7 @@ type TSong = {
     explicitLyrics: boolean;
     preview: string;
     artist: TArtist;
-    album: {
-        id: number;
-        title: string;
-        link: string;
-    };
+    album: TAlbum;
 }
 
 type TPlaylist = {
@@ -49,4 +60,5 @@ type TPlaylist = {
     songs: TSong[];
 }
 
-export type { TUser, TPlaylist, TArtist, TSong };
+
+export type { TUser, TPlaylist, TArtist, TSong, TAlbum };

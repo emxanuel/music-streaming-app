@@ -16,6 +16,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useUserContext } from '@/contexts/UserContext'
 import Sidebar from './Sidebar'
+import AppBar from './AppBar'
 
 const images = [
     {
@@ -79,13 +80,16 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-        ) : user._id === '0'? (
+        ) : user._id === '0' ? (
             <div>
                 Loading
             </div>
         ) : (
             <div className='flex h-screen'>
                 <Sidebar />
+                <div className='relative w-full'>
+                    <AppBar />
+                </div>
             </div>
         )
     )

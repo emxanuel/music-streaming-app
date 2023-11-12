@@ -7,15 +7,18 @@ import { login } from '@/functions/api/auth'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import type { TUser } from '@/types.d.ts'
 import { emptyUser } from '@/utilities/emptyObjects'
-import { useUserContext } from '@/contexts/UserContext'
+import { useUserContext } from '@/contexts/UserContext' 
+import { useRouter } from 'next/navigation'
 
 const FormLogin = () => {
+    const router = useRouter()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const { setUser } = useUserContext()
 
     const handleSubmit = () => {
         login(username, password, setUser)
+        router.push('/')
     }
 
     return (

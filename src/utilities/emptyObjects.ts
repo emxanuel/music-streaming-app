@@ -1,4 +1,4 @@
-import { TUser, TArtist, TSong, TPlaylist } from "@/types";
+import { TUser, TArtist, TSong, TPlaylist, TAlbum } from "@/types";
 
 const emptyUser: TUser = {
     _id: "",
@@ -26,6 +26,21 @@ const emptyArtist: TArtist = {
     tracklist: "",
 };
 
+const emptyAlbum: TAlbum = {
+    id: 0,
+    title: "",
+    link: "",
+    share: "",
+    cover: "",
+    cover_small: "",
+    cover_medium: "",
+    cover_big: "",
+    cover_xl: "",
+    duration: "",
+    artist: "",
+    tracks: [],
+};
+
 const emptySong: TSong = {
     title: "",
     link: "",
@@ -33,11 +48,7 @@ const emptySong: TSong = {
     explicitLyrics: false,
     preview: "",
     artist: emptyArtist,
-    album: {
-        id: 0,
-        title: "",
-        link: "",
-    },
+    album: emptyAlbum,
 };
 
 const emptyPlaylist: TPlaylist = {
@@ -51,4 +62,4 @@ const emptyPlaylist: TPlaylist = {
     songs: [],
 };
 
-export { emptyUser, emptyPlaylist };
+export { emptyUser, emptyPlaylist, emptySong, emptyAlbum };
