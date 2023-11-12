@@ -10,14 +10,11 @@ const CurrentSong = () => {
 
     useEffect(() => {
         if (song.info.title && !song.audio.playing(song.id)) {
-            console.log(song.audio.playing(song.id), play, song.id)
             if (play) {
-                console.log(song.audio)
                 song.audio.play(song.id)
             }
         }
         if (!play){
-            console.log('pause')
             song.audio.pause(song.id)
         }
     }, [play, song])
@@ -26,7 +23,7 @@ const CurrentSong = () => {
         song.info.title === '' ? (
             <div></div>
         ) : (
-            <div className='absolute bottom-[82px] w-[98%] left-0 bg-black flex shadow-lg shadow-[#0b7a75]/20 justify-evenly items-center'>
+            <div className='absolute duration-300 bottom-[82px] w-[98%] left-0 bg-black flex shadow-lg shadow-[#0b7a75]/20 justify-evenly items-center'>
                 <Image
                     src={song.info.album.cover_medium}
                     width={60}
