@@ -1,27 +1,53 @@
 import { axiosInstance } from "@/backend";
-import { TSong } from "@/types";
+import { TAlbum, TSong } from "@/types";
+import { AxiosResponse } from "axios";
 
 const searchSong = async (
     value: string,
     setResults: React.Dispatch<React.SetStateAction<TSong[]>>,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+    setLoading(true);
+    axiosInstance
+        .get("/songs", {
+            params: {
+                song: value,
+            },
+        })
+        .then((response) => {
+            setResults(response.data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+    
+};
+
+const searchAlbum = (
+    value: string,
+    setResults: React.Dispatch<React.SetStateAction<TAlbum[]>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     setLoading(true)
-    const request = await axiosInstance.get('/songs', {
-        params: {
-            song: value
-        }
-    })
-
-    if (request.status === 200){
-        setResults(request.data)
-    }
-    else{
-        console.log(request.status)
-    }
-    setLoading(false)
+    axiosInstance
+        .get('songs', {
+            params: {
+                album: value
+            }
+        })
+        .then(response => {
+            setResults(response.data)
+            console.log(response.data)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
 }
 
-export {
-    searchSong
-}
+export { searchSong, searchAlbum };

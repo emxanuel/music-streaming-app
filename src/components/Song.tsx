@@ -28,7 +28,7 @@ const Song: React.FC<IProps> = ({ data }) => {
 
     return (
         <Button fullWidth className='bg-black h-max' onClick={playSong} >
-            <div className='h-28 w-full flex justify-around items-center py-5 bg-black hover:scale-105 duration-200 hover:cursor-pointer'>
+            <div className='h-28 w-full flex justify-around items-center py-5 bg-black hover:scale-105 duration-200 hover:cursor-pointer hover:text-lg'>
                 <Image src={data.album.cover_medium}
                     alt='song-image'
                     width={70}

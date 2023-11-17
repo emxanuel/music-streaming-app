@@ -3,17 +3,19 @@
 import React, { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Input, Button, Select, SelectItem } from '@nextui-org/react'
-import { searchSong } from '@/functions/api/search'
-import { TSong } from '@/types'
+import { searchAlbum, searchSong } from '@/functions/api/search'
+import { TAlbum, TSong } from '@/types'
 import Image from 'next/image'
 import Song from '../../components/Song'
+import AlbumItem from '@/components/AlbumItem'
 
 const Search = () => {
     enum filters {
         ARTIST = 'artist',
         ALBUM = 'album'
     }
-    const [results, setResults] = useState<TSong[]>([])
+    const [songs, setSongs] = useState<TSong[]>([])
+    const [albums, setAlbums] = useState<TAlbum[]>([])
     const [query, setQuery] = useState('')
     const [filter, setFilter] = useState<filters>()
     const [loading, setLoading] = useState(false)
@@ -24,8 +26,13 @@ const Search = () => {
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         console.log(filter)
-        if (filter === undefined) {
-            searchSong(query, setResults, setLoading)
+        switch (filter){
+            case undefined:
+                searchSong(query, setSongs, setLoading)
+                break
+            case filters.ALBUM:
+                searchAlbum(query, setAlbums, setLoading)
+                break
         }
     }
 
@@ -42,27 +49,39 @@ const Search = () => {
                 </div>
                 <div className='flex justify-between w-full'>
                     <label>Search by: </label>
-                    <Select label='filter'>
-                        <SelectItem key={'2'} value={filters.ARTIST}>Artist</SelectItem>
-                        <SelectItem key={'3'} value={filters.ALBUM}>Album</SelectItem>
+                    <Select label='filter' onChange={(e) => setFilter(e.target.value as filters)}>
+                        <SelectItem key={filters.ARTIST} value={filters.ARTIST}>Artist</SelectItem>
+                        <SelectItem key={filters.ALBUM} value={filters.ALBUM}>Album</SelectItem>
                     </Select>
                 </div>
             </form>
             <div className='w-7/12'>
-                {results.length === 0 ? (
+                {filter === undefined ? songs.length === 0 ? (
                     <div className='flex justify-center'>
                         <h2>No results to show</h2>
                     </div>
-                ) : loading? (
+                ) : loading ? (
                     <div className='flex flex-col items-center'>
                         <p>loading...</p>
                     </div>
                 ) : (
                     <div>
-                        {results.map((result, index) => (
-                            <Song data={result} key={index}/>
+                        {songs.map((result, index) => (
+                            <Song data={result} key={index} />
                         ))}
                     </div>
+                ) : filter === filters.ALBUM ? (
+                    albums.map((album, index) => (
+                        <AlbumItem 
+                            key={index} 
+                            title={album.title}
+                            artist={album.artist.name}
+                            cover={album.cover_medium}
+                            id={album.id}
+                        />
+                    ))
+                ) : (
+                    <div></div>
                 )}
             </div>
         </div>

@@ -17,6 +17,7 @@ import 'swiper/css/pagination';
 import { useUserContext } from '@/contexts/UserContext'
 import Sidebar from './Sidebar'
 import AppBar from './AppBar'
+import CurrentSong from './CurrentSong'
 
 const images = [
     {
@@ -89,6 +90,7 @@ const Main = () => {
                 <Sidebar />
                 <div className='relative w-full'>
                     <AppBar />
+                    <CurrentSong />
                 </div>
             </div>
         )
