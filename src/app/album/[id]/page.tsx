@@ -1,3 +1,5 @@
+'use client'
+
 import { TSong } from '@/types'
 import React, {useState, useEffect} from 'react'
 
