@@ -50,7 +50,7 @@ type TSong = {
 }
 
 type TPlaylist = {
-    _id: string;
+    _id?: string;
     name: string;
     owner: {
         id: string;

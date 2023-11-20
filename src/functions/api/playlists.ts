@@ -49,6 +49,7 @@ const updatePlaylist = async (id: string, songs: TSong[]) => {
 
 const createPlaylist = async (playlist: TPlaylist) => {
     try{
+        delete playlist._id
         await axiosInstance.post('/playlists', {
             ...playlist 
         })
