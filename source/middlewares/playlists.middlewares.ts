@@ -30,6 +30,7 @@ const getSinglePlaylist = async (req: Request, res: Response) => {
 
 const createPlaylist = async (req: Request, res: Response) => {
     try {
+        console.log(req.body)
         const playlist = req.body as IPlaylist;
         const addedPlaylist = await addPlaylist(playlist);
         res.json(addedPlaylist);

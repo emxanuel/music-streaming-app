@@ -8,7 +8,7 @@ interface IUser {
     country: string;
 }
 
-type IArtist = {
+interface IArtist {
     id: number;
     name: string;
     link: string;
@@ -24,6 +24,21 @@ type IArtist = {
     tracklist: string;
 };
 
+interface IAlbum {
+    id: number;
+    title: string;
+    link: string;
+    share: string;
+    cover: string;
+    cover_small: string;
+    cover_medium: string;
+    cover_big: string;
+    cover_xl: string;
+    duration: string;
+    artist: string;
+    tracks: ISong[];
+}
+
 interface ISong {
     title: string;
     link: string;
@@ -31,11 +46,7 @@ interface ISong {
     explicitLyrics: boolean;
     preview: string;
     artist: IArtist;
-    album: {
-        id: number;
-        title: string;
-        link: string;
-    };
+    album: IAlbum;
 }
 
 interface IPlaylist {

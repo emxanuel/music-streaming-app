@@ -45,7 +45,16 @@ const PlaylistSchema = new mongoose.Schema({
             album: {
                 id: Number,
                 title: String,
-                link: String
+                link: String,
+                share: String,
+                cover: String,
+                cover_small: String,
+                cover_medium: String,
+                cover_big: String,
+                cover_xl: String,
+                duration: String,
+                artist: String,
+                tracks: [],
             },
         }),
     }

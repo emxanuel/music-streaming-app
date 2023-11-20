@@ -7,7 +7,7 @@ import db from './services/db-service'
 import bodyParser from "body-parser";
 import cors from 'cors'
 const app = express();
-const port = process.env.port || 80
+const port = process.env.PORT || 80
 const site = process.env.SITE || ''
 
 app.use((_: Request, res: Response, next: NextFunction) => {
