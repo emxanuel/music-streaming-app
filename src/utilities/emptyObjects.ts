@@ -37,7 +37,7 @@ const emptyAlbum: TAlbum = {
     cover_big: "",
     cover_xl: "",
     duration: "",
-    artist: "",
+    artist: emptyArtist,
     tracks: [],
 };
 
