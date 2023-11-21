@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Input, Button, Select, SelectItem } from '@nextui-org/react'
 import { searchAlbum, searchSong } from '@/functions/api/search'
@@ -8,44 +8,61 @@ import { TAlbum, TSong } from '@/types'
 import Image from 'next/image'
 import Song from '../../components/Song'
 import AlbumItem from '@/components/AlbumItem'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const Search = () => {
     enum filters {
         ARTIST = 'artist',
-        ALBUM = 'album'
+        ALBUM = 'album',
+        ALL = 'all'
     }
+    const router = useRouter()
+    const searchInput = useRef<HTMLInputElement | null>(null)
+    const searchParams = useSearchParams()
+    const queryFilter = searchParams.get('filter')
+    const search = searchParams.get('search')
     const [songs, setSongs] = useState<TSong[]>([])
     const [albums, setAlbums] = useState<TAlbum[]>([])
     const [query, setQuery] = useState('')
-    const [filter, setFilter] = useState<filters>()
+    const [filter, setFilter] = useState<filters>(filters.ALL)
     const [loading, setLoading] = useState(false)
+
     useEffect(() => {
-        console.log()
-    }, [])
+        console.log(search, queryFilter === filters.ALL)
+        switch (queryFilter) {  
+            case filters.ALL:
+                searchSong(search !== null? search : '', setSongs, setLoading)
+                break
+            case filters.ALBUM:
+                searchAlbum(search? search : '', setAlbums, setLoading)
+                break
+        }
+        if (search !== null && searchInput.current !== null){
+            setQuery(search)
+            searchInput.current.value = search
+        }
+    }, [search, queryFilter, filters.ALL, filters.ALBUM])
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        console.log(filter)
-        switch (filter){
-            case undefined:
-                searchSong(query, setSongs, setLoading)
-                break
-            case filters.ALBUM:
-                searchAlbum(query, setAlbums, setLoading)
-                break
-        }
+
+
     }
 
+    useEffect(() => {
+        router.push(`/search?search=${query}&filter=${filter}`)
 
+    }, [filter, query, router])
 
     return (
         <div className='h-screen w-screen flex flex-col items-center'>
-            <form className='flex w-3/12 items-center gap-5 flex-col'>
+            <form className='flex md:w-3/12 items-center gap-5 flex-col'>
                 <div className='flex w-full'>
-                    <Input label='search' onChange={e => setQuery(e.target.value)} />
-                    <Button className='h-full' onClick={handleSubmit}>
+                    <Input ref={searchInput} label='search' onChange={e => setQuery(e.target.value)} />
+                    <Link className='h-full flex items-center justify-center w-20' href={{ pathname: 'search', query: { search: query, filter: filter } }}>
                         <Icon fontSize={'26px'} icon='tabler:search' />
-                    </Button>
+                    </Link>
                 </div>
                 <div className='flex justify-between w-full'>
                     <label>Search by: </label>
@@ -55,8 +72,8 @@ const Search = () => {
                     </Select>
                 </div>
             </form>
-            <div className='w-7/12'>
-                {filter === undefined ? songs.length === 0 ? (
+            <div className='md:w-7/12'>
+                {filter === filters.ALL ? songs.length === 0 ? (
                     <div className='flex justify-center'>
                         <h2>No results to show</h2>
                     </div>
@@ -72,8 +89,8 @@ const Search = () => {
                     </div>
                 ) : filter === filters.ALBUM ? (
                     albums.map((album, index) => (
-                        <AlbumItem 
-                            key={index} 
+                        <AlbumItem
+                            key={index}
                             title={album.title}
                             artist={album.artist.name}
                             cover={album.cover_medium}

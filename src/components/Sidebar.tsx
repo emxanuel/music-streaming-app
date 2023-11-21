@@ -38,7 +38,7 @@ const Sidebar = () => {
     }, [newPlaylist, user._id])
 
     return (
-        <div className='w-1/4 border-r-small h-full flex flex-col'>
+        <div className='w-1/4 border-r-small h-full md:flex flex-col hidden'>
             <div className='border-b-small p-5 flex justify-start'>
                 {user.username}
             </div>

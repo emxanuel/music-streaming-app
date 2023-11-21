@@ -8,6 +8,7 @@ const searchSong = async (
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     setLoading(true);
+    console.log(value)
     axiosInstance
         .get("/songs", {
             params: {

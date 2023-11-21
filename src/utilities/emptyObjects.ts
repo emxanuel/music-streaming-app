@@ -36,9 +36,11 @@ const emptyAlbum: TAlbum = {
     cover_medium: "",
     cover_big: "",
     cover_xl: "",
-    duration: "",
+    duration: 0,
     artist: emptyArtist,
-    tracks: [],
+    tracks: {
+        data: []
+    },
 };
 
 const emptySong: TSong = {

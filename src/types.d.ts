@@ -34,9 +34,11 @@ type TAlbum = {
     cover_medium: string;
     cover_big: string;
     cover_xl: string;
-    duration: string;
+    duration: number;
     artist: TArtist;
-    tracks: TSong[];
+    tracks: {
+        data: TSong[]
+    };
 }
 
 type TSong = {
