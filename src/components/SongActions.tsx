@@ -34,7 +34,9 @@ const SongActions: React.FC<IProps> = ({ song }) => {
                         <Button key={playlist._id} className='flex w-full justify-evenly my-2' onClick={() => {
                             playlist.songs.push(song)
                             console.log(playlist)
-                            updatePlaylist(playlist._id, playlist.songs)
+                            if (playlist._id !== undefined){
+                                updatePlaylist(playlist._id, playlist.songs)
+                            }
                         }}>
                             <p>{playlist.name}</p>
                             <p>{playlist.owner.username}</p>
