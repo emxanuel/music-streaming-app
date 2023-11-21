@@ -41,6 +41,9 @@ const getSongs = async (req: Request, res: Response) => {
             if (request.status === 200){
                 res.json(request.data.data)
             }
+            else{
+                throw 'request failed'
+            }
         }
 
     }
