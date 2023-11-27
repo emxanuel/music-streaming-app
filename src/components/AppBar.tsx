@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const AppBar = () => {
     return (
-        <div className='absolute bottom-0 h-20 flex items-center w-full justify-around backdrop-blur bg-black/90'>
+        <div className='absolute bottom-0 h-20 flex items-center w-full justify-around backdrop-blur bg-black/90 z-10'>
             <Link href='/' className='flex flex-col items-center text-lg'>
                 <Icon fontSize={'26px'} icon="material-symbols:home-outline-rounded" />
                 <p>Home</p>

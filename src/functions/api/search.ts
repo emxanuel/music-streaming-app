@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/backend";
-import { TAlbum, TSong } from "@/types";
+import { TAlbum, TArtist, TSong } from "@/types";
 import { AxiosResponse } from "axios";
 
 const searchSong = async (
@@ -41,7 +41,6 @@ const searchAlbum = (
         })
         .then(response => {
             setResults(response.data)
-            console.log(response.data)
         })
         .catch(e => {
             console.log(e)
@@ -51,4 +50,27 @@ const searchAlbum = (
         })
 }
 
-export { searchSong, searchAlbum };
+const searchArtist = (
+    value: string,
+    setResults: React.Dispatch<React.SetStateAction<TArtist[]>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+    setLoading(true)
+    axiosInstance
+        .get('songs', {
+            params: {
+                artist: value
+            }
+        })
+        .then(response => {
+            setResults(response.data)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
+}
+
+export { searchSong, searchAlbum, searchArtist };

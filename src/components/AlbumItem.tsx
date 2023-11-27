@@ -10,9 +10,8 @@ interface IProps {
 }
 
 const AlbumItem: React.FC<IProps> = ({ title, artist, cover, id }) => {
-    console.log(title)
     return (
-        <Link href={`/album/${id}`} className='flex justify-around'>
+        <Link href={`/album/${id}`} className='h-28 w-full flex justify-around items-center py-5 bg-transparent duration-200 hover:cursor-pointer hover:bg-neutral-900/70'>
             <div>
                 <Image 
                     src={cover} alt='album cover'
@@ -20,8 +19,10 @@ const AlbumItem: React.FC<IProps> = ({ title, artist, cover, id }) => {
                     height={70}
                 />
             </div>
-            <div className='w-96 text-ellipsis whitespace-nowrap overflow-hidden flex items-center justify-center'>
-                <p>{title} - {artist}</p>
+            <div className='w-2/3 truncate flex'>
+                <p>
+                    <span>{title} - {artist}</span>
+                </p>
             </div>
         </Link>
     )

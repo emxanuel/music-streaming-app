@@ -64,4 +64,4 @@ const emptyPlaylist: TPlaylist = {
     songs: [],
 };
 
-export { emptyUser, emptyPlaylist, emptySong, emptyAlbum };
+export { emptyUser, emptyPlaylist, emptySong, emptyAlbum, emptyArtist };

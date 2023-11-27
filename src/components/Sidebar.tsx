@@ -39,16 +39,18 @@ const Sidebar = () => {
 
     return (
         <div className='w-1/4 border-r-small h-full md:flex flex-col hidden'>
-            <div className='border-b-small p-5 flex justify-start'>
+            <div className=' p-5 flex justify-start'>
                 {user.username}
             </div>
-            <div className='flex flex-col items-center overflow-y-scroll'>
-                <h2 className='text-lg border-b-small w-full text-center py-2'>Playlists</h2>
-                {playlists.length !== 0 ? playlists.map((p, index) => (
-                    <Playlist info={p} key={index}></Playlist>
-                )) : (
-                    <div></div>
-                )}
+            <div className='flex flex-col items-center '>
+                <h2 className='text-lg w-full text-center py-2'>Playlists</h2>
+                <div className='flex flex-col h-60 gap-5 w-full overflow-y-scroll rounded-md border-medium border-[#0b7a75]/20 '>
+                    {playlists.length !== 0 ? playlists.map((p, index) => (
+                        <Playlist info={p} key={index}></Playlist>
+                    )) : (
+                        <div></div>
+                    )}
+                </div>
                 <Button fullWidth className='bg-black  flex items-center justify-around' onClick={() => setOpenModal(true)}>
                     <Icon className='bg-neutral-900 rounded-md' fontSize={'24px'} icon="material-symbols:add" />
                     <p>Create new</p>
@@ -60,9 +62,9 @@ const Sidebar = () => {
                 >
                     <ModalContent className='flex flex-col items-center py-10'>
                         <h2 className='text-2xl border-b mb-4'>Create a new playlist</h2>
-                        <form className='flex items-center h-full'>
+                        <form className='flex items-center h-full flex-col gap-2'>
                             <Input size='sm' label='Playlist name' id='playlistName' onChange={e => setPlaylistName(e.target.value)} />
-                            <Button size='lg' type='submit' onClick={async (e) => {
+                            <Button fullWidth size='lg' type='submit' onClick={async (e) => {
                                 e.preventDefault()
                                 setNewPlaylist(old => ({
                                     ...old,

@@ -10,6 +10,7 @@ import { getDurationFormat } from '@/utilities/functions'
 import Sidebar from '@/components/Sidebar'
 import AppBar from '@/components/AppBar'
 import CurrentSong from '@/components/CurrentSong'
+import Layout from '@/components/Layout'
 
 const Album = ({ params }: { params: { id: number } }) => {
     const [album, setAlbum] = useState<TAlbum>(emptyAlbum)
@@ -19,41 +20,44 @@ const Album = ({ params }: { params: { id: number } }) => {
     }, [params.id])
 
     return (
-        <div className='flex h-screen w-full'>
-            <Sidebar />
-            <div className='flex flex-col w-full items-center relative mt-[140px]'>
-                <div className='flex items-center w-[50rem] justify-around fixed backdrop-blur-sm top-0 z-10'>
+        <Layout>
+            <div className='flex flex-col items-center h-full overflow-hidden'>
+                <div className='flex items-center w-full justify-evenly top-0 z-10 gap-10 relative shadow-current'>
                     <Image
                         width={140}
                         height={140}
                         src={album.cover_xl}
                         alt={`${album.title} cover`}
-                        className=''
+                        className='z-20'
                     />
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col truncate z-20'>
                         <h1 className='text-4xl'>{album.title}</h1>
                         <p>
                             <span className='text-[#0b7a75] font-semibold'>{album.artist.name}</span> - {album.tracks.data.length} songs - duration: {`${getDurationFormat(album.duration).hours} h, ${getDurationFormat(album.duration).minutes} min`}
                         </p>
                     </div>
+                    <Image
+                        width={140}
+                        height={140}
+                        src={album.cover_xl}
+                        alt={`${album.title} cover`}
+                        className='blur-[14rem] w-full absolute h-full z-10 select-none'
+                    />
                 </div>
-                <div className='w-full flex justify-center overflow-y-scroll absolute h-full'>
-                    <div>
+                <div className='w-2/3 flex flex-col flex-grow overflow-y-scroll z-0'>
+                    <div className='flex flex-col overflow-y-scroll pb-20'>
                         {album.id !== 0 ? (
                             album.tracks.data.map((song, index) => (
-                                <Song key={index} data={song} />
+                                <Song key={index} data={song} number={index + 1} />
                             ))
 
                         ) : (
-                            <div></div>
+                            <div className=''></div>
                         )}
-                        <div className='h-32 w-full' />
                     </div>
                 </div>
-                <CurrentSong />
-                <AppBar />
             </div>
-        </div>
+        </Layout>
     )
 }
 

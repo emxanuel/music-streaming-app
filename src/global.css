@@ -38,6 +38,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 }
 
 .blueGradient {
@@ -60,4 +61,9 @@ body {
         hsla(177, 100%, 41%, 1) 0%,
         hsla(237, 62%, 44%, 1) 100%
     );
+}
+
+.thin-navbar::-webkit-scrollbar{
+    height: 2px;
+    width: 2px;
 }
