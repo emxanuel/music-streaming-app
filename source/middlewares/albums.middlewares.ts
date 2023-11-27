@@ -5,7 +5,6 @@ const getAlbumById = async (req: Request, res: Response) => {
     try {
         const { id } = req.query;
         const request = await axios.get(`${process.env.API_URL}/album/${id}`);
-
         if (request.status === 200){
             res.json(request.data)
         }
