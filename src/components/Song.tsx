@@ -7,6 +7,8 @@ import { Modal } from '@nextui-org/react'
 import SongActions from './SongActions'
 import { useAudioContext } from '@/contexts/SongContext'
 import { Howl } from 'howler'
+import { useUserContext } from '@/contexts/UserContext'
+import { addFavoriteSong, getUserById } from '@/functions/api/users'
 
 interface IProps {
     data: TSong,
@@ -14,11 +16,28 @@ interface IProps {
 }
 
 const Song: React.FC<IProps> = ({ data, number }) => {
+    const { user, setUser } = useUserContext()
     const [openModal, setOpenModal] = useState(false)
     const { song, setSong: setAudio } = useAudioContext()
+    const [liked, setLiked] = useState(false)
+
+    useEffect(() => {
+        setLiked(user.likedSongs.some(song => song.id === data.id))
+    }, [data.id, user])
+
     const playSong = () => {
         song.audio.pause(song.id)
         setAudio({ info: data, audio: new Howl({ src: [data.preview], format: 'mp3', html5: true }) })
+    }
+
+    const likeSong = async () => {
+        addFavoriteSong(user._id, data).then(() => {
+            getUserById(user._id)
+                .then(u => {
+                    setUser(u)
+                })
+        })
+
     }
 
     useEffect(() => {
@@ -29,7 +48,7 @@ const Song: React.FC<IProps> = ({ data, number }) => {
 
     return (
         <div className='bg-transparent h-max' onClick={playSong} >
-            <div className='h-28 w-full flex justify-around items-center py-5 bg-transparent duration-200 hover:cursor-pointer hover:bg-neutral-900/70'>
+            <div className='h-28 w-full flex justify-around  items-center py-5 bg-transparent duration-200 hover:cursor-pointer hover:bg-neutral-900/70 px-3'>
                 {!number ? (
                     <Image src={data.album.cover_medium}
                         alt='song-image'
@@ -40,10 +59,13 @@ const Song: React.FC<IProps> = ({ data, number }) => {
                 ) : (
                     <p>{number}</p>
                 )}
-                <p className='w-2/3 truncate'>
+                <p className='w-2/3 truncate text-center'>
                     <span>{data.title} - {data.artist.name}</span>
                 </p>
-                <div>
+                <div className='flex'>
+                    <Button size='sm' className='bg-transparent' onClick={likeSong}>
+                        <Icon fontSize={'20px'} icon={liked ? 'ph:heart-fill' : 'ph:heart'} />
+                    </Button>
                     <Button size='sm' className='bg-transparent' onClick={() => setOpenModal(true)}>
                         <Icon fontSize={'20px'} icon="material-symbols:more-vert" />
                     </Button>

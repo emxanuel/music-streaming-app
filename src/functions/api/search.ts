@@ -6,14 +6,15 @@ const searchSong = async (
     value: string,
     setResults: React.Dispatch<React.SetStateAction<TSong[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    controller: AbortController
 ) => {
     setLoading(true);
-    console.log(value)
     axiosInstance
         .get("/songs", {
             params: {
                 song: value,
             },
+            signal: controller.signal
         })
         .then((response) => {
             setResults(response.data);
@@ -31,13 +32,16 @@ const searchAlbum = (
     value: string,
     setResults: React.Dispatch<React.SetStateAction<TAlbum[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    controller: AbortController
+
 ) => {
     setLoading(true)
     axiosInstance
         .get('songs', {
             params: {
                 album: value
-            }
+            },
+            signal: controller.signal
         })
         .then(response => {
             setResults(response.data)
@@ -54,13 +58,15 @@ const searchArtist = (
     value: string,
     setResults: React.Dispatch<React.SetStateAction<TArtist[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    controller: AbortController
 ) => {
     setLoading(true)
     axiosInstance
         .get('songs', {
             params: {
                 artist: value
-            }
+            },
+            signal: controller.signal
         })
         .then(response => {
             setResults(response.data)

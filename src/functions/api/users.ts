@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/backend";
-import type { TUser } from "@/types";
+import type { TSong, TUser } from "@/types";
 import { emptyUser } from "@/utilities/emptyObjects";
 
 const getUserById = async (
@@ -21,4 +21,19 @@ const getUserById = async (
     return user
 };
 
-export { getUserById };
+const addFavoriteSong = async (id: string, song: TSong) => {
+    try{
+        axiosInstance.post(`/songs/user/${id}/liked`, {
+            song
+        })
+        .catch(e => {
+            throw new Error(e)
+        })
+    }
+    catch(e){
+        console.log(e)
+    }
+
+}
+
+export { getUserById, addFavoriteSong    };

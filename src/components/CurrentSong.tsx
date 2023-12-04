@@ -23,7 +23,7 @@ const CurrentSong = () => {
         song.info.title === '' ? (
             <div></div>
         ) : (
-            <div className='absolute duration-300 bottom-[82px] w-[98%] left-0 bg-black flex shadow-lg shadow-[#0b7a75]/20 justify-evenly items-center'>
+            <div className='absolute duration-300 bottom-[82px] w-[98%] left-0 bg-black/90 backdrop-blur-sm flex shadow-lg shadow-[#0b7a75]/20 justify-evenly items-center z-20'>
                 <Image
                     src={song.info.album.cover_medium}
                     width={60}

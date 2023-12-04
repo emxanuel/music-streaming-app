@@ -1,5 +1,7 @@
 import { axiosInstance } from "@/backend";
 import { TAlbum, TArtist, TSong } from "@/types";
+import { emptyArtist } from "@/utilities/emptyObjects";
+import { useEffect, useState } from "react";
 
 export const getArtistById = (
     id: number,
@@ -61,3 +63,20 @@ export const getRelatedArtist = (
             console.log(e);
         })
 };
+
+export const useGetArtist = (id: number) => {
+    const [loading, setLoading] = useState(true)
+    const [artist, setArtist] = useState<TArtist>(emptyArtist)
+    const [albums, setAlbums] = useState<TAlbum[]>([])
+    const [relatedArtists, setRelatedArtists] = useState<TArtist[]>([])
+    const [songs, setSongs] = useState<TSong[]>([])
+
+    useEffect(() => {
+        getArtistById(id, setArtist, setLoading)
+        getSongsByArtist(id, 5, setSongs)
+        getRelatedArtist(id, 10, setRelatedArtists)
+        getAlbumsByArtist(id, setAlbums)
+    }, [id])
+
+    return {loading, artist, albums, relatedArtists, songs}
+}

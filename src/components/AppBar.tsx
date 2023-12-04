@@ -13,7 +13,7 @@ const AppBar = () => {
                 <Icon fontSize={'26px'} icon='tabler:search' /> 
                 <p>Search</p>
             </Link>
-            <Link href='#' className='flex flex-col items-center text-lg'>
+            <Link href='/profile' className='flex flex-col items-center text-lg'>
                 <Icon fontSize={'26px'} icon="ph:user-bold" />
                 <p>Profile</p>
             </Link>

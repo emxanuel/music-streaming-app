@@ -19,7 +19,7 @@ const AlbumItem: React.FC<IProps> = ({ title, artist, cover, id }) => {
                     height={70}
                 />
             </div>
-            <div className='w-2/3 truncate flex'>
+            <div className='w-96 truncate flex'>
                 <p>
                     <span>{title} - {artist}</span>
                 </p>

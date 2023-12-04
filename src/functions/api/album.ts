@@ -1,20 +1,26 @@
 import { axiosInstance } from "@/backend";
 import { TAlbum } from "@/types";
-import React from "react";
+import { emptyAlbum } from "@/utilities/emptyObjects";
+import React, { useState, useEffect } from "react";
 
-const getAlbumById = (
-    id: number,
-    setAlbum: React.Dispatch<React.SetStateAction<TAlbum>>
-) => {
-    axiosInstance.get('/album', {
-        params: {
-            id
-        }
-    })
-    .then((response) => setAlbum(response.data))
-    .catch(e => console.log(e))
-}
+const useGetAlbum = (id: number) => {
+    const [album, setAlbum] = useState<TAlbum | null>(null);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        axiosInstance
+            .get("/album", {
+                params: {
+                    id,
+                },
+            })
+            .then((response) => {
+                setAlbum(response.data as TAlbum);
+            })
+            .catch((e) => console.log(e))
+            .finally(() => setLoading(false));
+    }, [id]);
 
-export {
-    getAlbumById
-}
+    return { album, loading };
+};
+
+export { useGetAlbum };

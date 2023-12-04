@@ -22,6 +22,9 @@ const RelatedArtists: React.FC<Props> = ({ data }) => {
                                 alt={artist.name}
                                 src={artist.picture_xl}
                                 className='rounded-full'
+                                style={{
+                                    viewTransitionName: `image-artist-${artist.id}`
+                                }}
                             />
                             <h3 className='text-xl'>{artist.name}</h3>
                         </Link>

@@ -6,6 +6,7 @@ type TUser = {
     email: string;
     password: string;
     phone: string;
+    likedSongs: TSong[]
 };
 
 type TArtist = {
@@ -42,6 +43,7 @@ type TAlbum = {
 }
 
 type TSong = {
+    id: string
     title: string;
     link: string;
     duration: number;
