@@ -22,7 +22,7 @@ const Song: React.FC<IProps> = ({ data, number }) => {
     const [liked, setLiked] = useState(false)
 
     useEffect(() => {
-        setLiked(user.likedSongs.some(song => song.id === data.id))
+        setLiked(user.likedSongs?.some(song => song.id === data.id))
     }, [data.id, user.likedSongs])
 
     const playSong = () => {
