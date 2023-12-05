@@ -33,7 +33,6 @@ const SongActions: React.FC<IProps> = ({ song }) => {
                     {playlists.map((playlist) => (
                         <Button key={playlist._id} className='flex w-full justify-evenly my-2' onClick={() => {
                             playlist.songs.push(song)
-                            console.log(playlist)
                             if (playlist._id !== undefined){
                                 updatePlaylist(playlist._id, playlist.songs)
                             }

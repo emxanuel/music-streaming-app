@@ -43,18 +43,16 @@ const images = [
 const Main = () => {
     const { user } = useUserContext()
     return (
-        user._id === '' ? ( 
+        user._id === '' ? (
             <UnloggedHome />
         ) : user._id === '0' ? (
             <div>
                 Loading
             </div>
         ) : (
-            <Layout>
-                <div>
-                    
-                </div>
-            </Layout>
+            <div>   
+
+            </div>
         )
     )
 }

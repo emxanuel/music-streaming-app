@@ -18,10 +18,15 @@ const login = async (
             if (request.data !== 'user not found'){
                 const user = await getUserById(request.data)
                 setUser(user)
+                return true
             }
+        }
+        else{
+            return false
         }
     } catch (e) {
         console.log(e);
+        return false
     }
 };
 

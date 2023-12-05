@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link';
 import {
     Navbar as Nav,
     NavbarBrand,
     NavbarContent,
     NavbarItem,
+    NavbarMenu,
     NavbarMenuToggle,
 } from "@nextui-org/react";
 import { useUserContext } from '@/contexts/UserContext';
@@ -23,9 +24,10 @@ const menuItems = [
 ]
 
 const Navbar = () => {
-    const {user} = useUserContext()
+    const { user } = useUserContext()
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
-        <Nav className={`border-b-2 border-b-neutral-500 ${user._id === ''? 'block' : 'hidden'}`}>
+        <Nav className={`border-b-2 border-b-neutral-500 ${user._id === '' ? 'flex flex-col' : 'hidden'} z-20`} shouldHideOnScroll isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
             <NavbarMenuToggle className='md:hidden'></NavbarMenuToggle>
             <NavbarBrand>
                 <Link href={'/'}><h1 className='text-2xl'>SoundWave</h1></Link>
@@ -37,6 +39,18 @@ const Navbar = () => {
                     ))
                 }
             </NavbarContent>
+            <NavbarMenu>
+                <NavbarItem><Link href={'/'} className='bgBlue py-2 text-lg px-5 rounded-md' onClick={() => {
+                    setIsMenuOpen(false)
+                }}>Home</Link></NavbarItem>
+                {
+                    menuItems.map(i => (
+                        <NavbarItem key={i.title}><Link href={i.href} className='bgBlue py-2 text-lg px-5 rounded-md' onClick={() => {
+                            setIsMenuOpen(false)
+                        }}>{i.title}</Link></NavbarItem>
+                    ))
+                }
+            </NavbarMenu>
         </Nav>
     )
 }

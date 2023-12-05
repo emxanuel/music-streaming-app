@@ -8,7 +8,7 @@ import SongActions from './SongActions'
 import { useAudioContext } from '@/contexts/SongContext'
 import { Howl } from 'howler'
 import { useUserContext } from '@/contexts/UserContext'
-import { addFavoriteSong, getUserById } from '@/functions/api/users'
+import { addFavoriteSong, getUserById, deleteFavoriteSong } from '@/functions/api/users'
 
 interface IProps {
     data: TSong,
@@ -23,26 +23,32 @@ const Song: React.FC<IProps> = ({ data, number }) => {
 
     useEffect(() => {
         setLiked(user.likedSongs.some(song => song.id === data.id))
-    }, [data.id, user])
+    }, [data.id, user.likedSongs])
 
     const playSong = () => {
         song.audio.pause(song.id)
         setAudio({ info: data, audio: new Howl({ src: [data.preview], format: 'mp3', html5: true }) })
     }
 
-    const likeSong = async () => {
-        addFavoriteSong(user._id, data).then(() => {
-            getUserById(user._id)
-                .then(u => {
-                    setUser(u)
-                })
-        })
-
+    const likeSong = () => {
+        switch (liked) {
+            case true:
+                deleteFavoriteSong(user._id, data).
+                    then((u) => {
+                        setUser(u)
+                    })
+                break
+            case false:
+                addFavoriteSong(user._id, data)
+                    .then((u) => {
+                        setUser(u)
+                    })
+                break
+        }
     }
 
     useEffect(() => {
         song.id = song.audio.play(song.id)
-        console.log(song.id)
     }, [song, song.audio])
 
 

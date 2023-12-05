@@ -8,6 +8,7 @@ const emptyUser: TUser = {
     email: "",
     password: "",
     phone: "",
+    likedSongs: []
 };
 
 const emptyArtist: TArtist = {
@@ -44,6 +45,7 @@ const emptyAlbum: TAlbum = {
 };
 
 const emptySong: TSong = {
+    id: '',
     title: "",
     link: "",
     duration: 0,

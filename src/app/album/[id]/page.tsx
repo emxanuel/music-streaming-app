@@ -2,23 +2,16 @@
 
 import Song from '@/components/Song'
 import { useGetAlbum } from '@/functions/api/album'
-import { TAlbum, TSong } from '@/types'
-import { emptyAlbum } from '@/utilities/emptyObjects'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { getDurationFormat } from '@/utilities/functions'
-import Sidebar from '@/components/Sidebar'
-import AppBar from '@/components/AppBar'
-import CurrentSong from '@/components/CurrentSong'
-import Layout from '@/components/Layout'
+import { metadata } from '@/app/layout'
 import SkeletonAlbum from './Skeleton'
 
 const Album = ({ params }: { params: { id: number } }) => {
     const { album, loading } = useGetAlbum(params.id)
-
-
     return (
-        <Layout>
+        <div>
             {loading ? (
                 <SkeletonAlbum />
             ) : (
@@ -60,7 +53,7 @@ const Album = ({ params }: { params: { id: number } }) => {
                 </div>
             )}
 
-        </Layout>
+        </div>
     )
 }
 

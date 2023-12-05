@@ -1,28 +1,50 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input, Button } from '@nextui-org/react'
 import { Link } from '@nextui-org/react'
 import { login } from '@/functions/api/auth'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import type { TUser } from '@/types.d.ts'
 import { emptyUser } from '@/utilities/emptyObjects'
-import { useUserContext } from '@/contexts/UserContext' 
+import { useUserContext } from '@/contexts/UserContext'
 import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 const FormLogin = () => {
     const router = useRouter()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const { setUser } = useUserContext()
+    const { user, setUser } = useUserContext()
+    const [message, setMessage] = useState({
+        text: '',
+        style: ''
+    })
 
     const handleSubmit = () => {
-        login(username, password, setUser)
+        setMessage({
+            text: '',
+            style: ''
+        })
+        login(username, password, setUser).then(result => {
+            if (result === true) {
+                router.push('/')
+            }
+            else {
+                setMessage({
+                    text: 'Incorrect username or password',
+                    style: 'text-red-500'
+                })
+            }
+        })
+    }
+
+    if (user._id !== '0' && user._id !== '') {
         router.push('/')
     }
 
     return (
-        <div className='flex border items-center'>
+        <div className='flex border items-center rounded-md'>
             <div className='hidden md:flex md:w-96 items-center flex-col pt-12 border-r h-full rounded-l-md'>
                 <h1 className='text-3xl'>Sound Wave</h1>
                 <p className='text-2xl mt-24'>Welcome Again</p>
@@ -36,6 +58,7 @@ const FormLogin = () => {
                 <Button className='duration-150 hover:bg-default-500 h-10 max-w-sm' fullWidth>
                     <span className='flex items-center gap-4 text-lg'><Icon icon={'logos:google-icon'} />Sign in with Google</span>
                 </Button>
+                <p className={`${message.style}`}>{message.text}</p>
                 <p>Don{"'"}t have an account? <Link className='hover:text-primary-400 duration-150' href={'/register'}>Register</Link></p>
             </form>
         </div>

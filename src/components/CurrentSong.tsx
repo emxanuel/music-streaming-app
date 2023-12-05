@@ -1,3 +1,5 @@
+'use client'
+
 import { useAudioContext } from '@/contexts/SongContext'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'

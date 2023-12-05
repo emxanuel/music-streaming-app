@@ -7,7 +7,6 @@ import { emptyPlaylist } from '@/utilities/emptyObjects'
 import React, { useEffect, useState } from 'react'
 import Song from '../../../components/Song'
 import CurrentSong from '@/components/CurrentSong'
-import Layout from '@/components/Layout'
 
 const Playlist = ({ params }: { params: { id: string } }) => {
     const [playlist, setPlaylist] = useState<TPlaylist>(emptyPlaylist)
@@ -17,7 +16,7 @@ const Playlist = ({ params }: { params: { id: string } }) => {
     }, [params.id])
 
     return (
-        <Layout>
+        <div>
             {playlist._id === '' ? (
                 <div></div>
             ) : (
@@ -33,7 +32,7 @@ const Playlist = ({ params }: { params: { id: string } }) => {
                     </div>
                 </div>
             )}
-        </Layout>
+        </div>
     )
 }
 
