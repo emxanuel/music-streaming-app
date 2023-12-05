@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import axios from "axios";
+import { IUser } from "../types";
+import { addUser, getUserById, updateUserById } from "../models/users";
 
-const getSongs = async (req: Request, res: Response) => {
+export const getSongs = async (req: Request, res: Response) => {
     try {
         if (req.query.artist) {
             const request = await axios.request({
@@ -48,4 +50,30 @@ const getSongs = async (req: Request, res: Response) => {
     }
 };
 
-export { getSongs };
+export const addFavoriteSong = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { song } = req.body;
+        let user: IUser | null = null;
+        user = (await getUserById(id)) as IUser;
+        user.likedSongs.push(song);
+        const updatedUser = await updateUserById(id, user);
+        res.json(updatedUser);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const deleteFavoriteSong = async (req: Request, res: Response) => {
+    try {
+        const { song } = req.body;
+        const { id } = req.params;
+        let user: IUser | null = null;
+        user = (await getUserById(id)) as IUser;
+        user.likedSongs = user.likedSongs.filter((s) => s.id !== song.id);
+        const updatedUser = await updateUserById(id, user);
+        res.json(updatedUser);
+    } catch (e) {
+        res.json(e);
+    }
+};

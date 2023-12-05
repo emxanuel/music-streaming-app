@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+    import { Request, Response } from "express";
 import {
     addUser,
     deleteUserById,
@@ -47,13 +47,13 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     try {
-        const user = req.body as IUser;
+        const {user} = req.body;
         user.password = sha256(user.password)
         const addedUser = await addUser(user);
         res.json(addedUser);
-    } catch (e) {
-        console.error(e);
-        res.sendStatus(500).json(e);
+    } catch (e: any) {
+        console.log(e.code)
+        res.send(e);
     }
 };
 

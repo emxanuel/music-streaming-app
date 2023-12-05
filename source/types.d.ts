@@ -6,6 +6,7 @@ interface IUser {
     password: string;
     phone: string;
     country: string;
+    likedSongs: ISong[]
 }
 
 interface IArtist {
@@ -40,6 +41,7 @@ interface IAlbum {
 }
 
 interface ISong {
+    id: string;
     title: string;
     link: string;
     duration: number;
