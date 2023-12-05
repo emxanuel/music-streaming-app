@@ -11,7 +11,7 @@ import SkeletonAlbum from './Skeleton'
 const Album = ({ params }: { params: { id: number } }) => {
     const { album, loading } = useGetAlbum(params.id)
     return (
-        <div>
+        <div className='h-full'>
             {loading ? (
                 <SkeletonAlbum />
             ) : (

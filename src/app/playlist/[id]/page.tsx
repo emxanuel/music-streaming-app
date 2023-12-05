@@ -16,7 +16,7 @@ const Playlist = ({ params }: { params: { id: string } }) => {
     }, [params.id])
 
     return (
-        <div>
+        <div className='h-full'>
             {playlist._id === '' ? (
                 <div></div>
             ) : (
