@@ -12,7 +12,7 @@ const Playlists: React.FC<Props> = ({ data }) => {
     return (
         <section className='flex gap-5 w-full overflow-x-scroll no-navbar'>
             {
-                data.map((playlist, index) => (
+                data?.map((playlist, index) => (
                     playlist.songs[0] ? (
                         <Link href={`/playlist/${playlist._id}`} className='flex-shrink-0 flex-grow-0 relative overflow-hidden' key={index}>
                             <Image

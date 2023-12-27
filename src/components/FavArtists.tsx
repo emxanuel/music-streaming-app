@@ -11,7 +11,7 @@ const FavArtists: React.FC<Props> = ({data}) => {
     return (
         <div className='flex w-full overflow-x-scroll gap-5 scroll no-navbar'>
             {
-                data.map((artist, index) => (
+                data?.map((artist, index) => (
                     <Link href={`/artist/${artist.id}`} key={index} className='flex-shrink-0 flex-grow-0'>
                         <Image 
                             src={artist.picture_medium}
