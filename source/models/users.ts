@@ -65,6 +65,23 @@ const UserSchema = new mongoose.Schema({
                 tracks: [],
             },
         })
+    },
+    likedArtists: {
+        type: Array({
+            id: Number,
+            name: String,
+            link: String,
+            share: String,
+            picture: String,
+            picture_small: String,
+            picture_medium: String,
+            picture_big: String,
+            picture_xl: String,
+            nb_album: Number,
+            nb_fan: Number,
+            radio: Boolean,
+            tracklist: String,
+        })
     }
 });
 

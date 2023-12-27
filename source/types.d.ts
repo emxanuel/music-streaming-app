@@ -6,7 +6,8 @@ interface IUser {
     password: string;
     phone: string;
     country: string;
-    likedSongs: ISong[]
+    likedSongs: ISong[];
+    likedArtists: IArtist[];
 }
 
 interface IArtist {

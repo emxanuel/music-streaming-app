@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import axios from "axios";
+import { getUserById, updateUserById } from "../models/users";
+import { IUser } from "../types";
 
 export const getArtist = async (req: Request, res: Response) => {
     try {
@@ -64,5 +66,33 @@ export const getArtistAlbums = (req: Request, res: Response) => {
     }
     catch(e){
         console.log(e)
+    }
+}
+
+export const likeArtist = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { artist } = req.body;
+        let user: IUser | null = null;
+        user = (await getUserById(id)) as IUser;
+        user.likedArtists.push(artist);
+        const updatedUser = await updateUserById(id, user);
+        res.json(updatedUser);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const unlikeArtist = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { artist } = req.body;
+        let user: IUser | null = null;
+        user = (await getUserById(id)) as IUser;
+        user.likedArtists = user.likedArtists.filter(a => a.id !== artist.id)
+        const updatedUser = await updateUserById(id, user);
+        res.json(updatedUser);
+    } catch (e) {
+        console.log(e);
     }
 }

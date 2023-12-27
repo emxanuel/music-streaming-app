@@ -1,4 +1,4 @@
-    import { Request, Response } from "express";
+import { Request, Response } from "express";
 import {
     addUser,
     deleteUserById,
@@ -10,7 +10,7 @@ import {
 import { IUser } from "../types";
 import { sha256 } from "../functions/main";
 
-const getAllUsers = async (_: Request, res: Response) => {
+export const getAllUsers = async (_: Request, res: Response) => {
     try {
         const users = await getUsers();
         res.json(users);
@@ -19,7 +19,7 @@ const getAllUsers = async (_: Request, res: Response) => {
     }
 };
 
-const getSingleUser = async (req: Request, res: Response) => {
+export const getSingleUser = async (req: Request, res: Response) => {
     try {
         let user: IUser | null = null;
         if (req.query.id) {
@@ -45,7 +45,7 @@ const getSingleUser = async (req: Request, res: Response) => {
     }
 };
 
-const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
     try {
         const {user} = req.body;
         user.password = sha256(user.password)
@@ -57,7 +57,7 @@ const createUser = async (req: Request, res: Response) => {
     }
 };
 
-const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
         const { username } = req.body;
@@ -73,7 +73,7 @@ const updateUser = async (req: Request, res: Response) => {
     }
 };
 
-const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
     try{
         const id = req.params.id
         const deletedUser = await deleteUserById(id)
@@ -85,11 +85,3 @@ const deleteUser = async (req: Request, res: Response) => {
         res.sendStatus(500).json(e)
     }
 }
-
-export { 
-    getAllUsers, 
-    getSingleUser, 
-    createUser, 
-    updateUser,
-    deleteUser
-};
