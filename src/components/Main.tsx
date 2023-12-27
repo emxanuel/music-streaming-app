@@ -12,6 +12,7 @@ import 'swiper/css/pagination';
 import { useUserContext } from '@/contexts/UserContext'
 import Layout from './Layout'
 import UnloggedHome from './UnloggedHome'
+import LoggedHome from './LoggedHome'
 
 const images = [
     {
@@ -50,8 +51,8 @@ const Main = () => {
                 Loading
             </div>
         ) : (
-            <div>   
-
+            <div className='h-full overflow-y-scroll pb-20'>   
+                <LoggedHome />
             </div>
         )
     )

@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/backend";
-import { TAlbum, TArtist, TSong } from "@/types";
+import { TAlbum, TArtist, TSong, TUser } from "@/types";
 import { emptyArtist } from "@/utilities/emptyObjects";
 import { useEffect, useState } from "react";
 
@@ -64,19 +64,52 @@ export const getRelatedArtist = (
         })
 };
 
-export const useGetArtist = (id: number) => {
-    const [loading, setLoading] = useState(true)
-    const [artist, setArtist] = useState<TArtist>(emptyArtist)
-    const [albums, setAlbums] = useState<TAlbum[]>([])
-    const [relatedArtists, setRelatedArtists] = useState<TArtist[]>([])
-    const [songs, setSongs] = useState<TSong[]>([])
+export const likeArtist = (
+    id: string,
+    artist: TArtist,
+    setUser: (user: TUser) => void,
+) => {
+    
+    axiosInstance
+        .put(`/artists/user/${id}/like`, {
+            artist: artist
+        })
+        .then((response) => {
+            setUser(response.data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+}
 
-    useEffect(() => {
-        getArtistById(id, setArtist, setLoading)
-        getSongsByArtist(id, 5, setSongs)
-        getRelatedArtist(id, 10, setRelatedArtists)
-        getAlbumsByArtist(id, setAlbums)
-    }, [id])
+export const unlikeArtist = (
+    id: string,
+    artist: TArtist,
+    setUser: (user: TUser) => void,
+) => {
+    axiosInstance
+        .put(`/artists/user/${id}/unlike`, {
+            artist: artist
+        })
+        .then((response) => {
+            setUser(response.data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+}   
 
-    return {loading, artist, albums, relatedArtists, songs}
+export const verifyLikedArtist = (
+    likedArtists: TArtist[],
+    artist: TArtist,
+) => {
+    console.log(likedArtists)
+    if (likeArtist.length > 0){
+        const liked = likedArtists.some((likedArtist) => likedArtist.id === artist.id);
+        return liked;
+    }
+    else{
+        return false;
+    }
+
 }

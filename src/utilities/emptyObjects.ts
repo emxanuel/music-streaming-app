@@ -8,7 +8,8 @@ const emptyUser: TUser = {
     email: "",
     password: "",
     phone: "",
-    likedSongs: []
+    likedSongs: [],
+    likedArtists: []
 };
 
 const emptyArtist: TArtist = {

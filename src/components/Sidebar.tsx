@@ -38,19 +38,19 @@ const Sidebar = () => {
     }, [newPlaylist, user._id])
 
     return (
-        <div className='w-1/4 border-r-small h-full md:flex flex-col hidden'>
-            <div className=' p-5 flex justify-start'>
+        <aside className='w-[24rem] border-r-small h-full md:flex flex-col hidden z-10 bg-black'>
+            <header className=' p-5 flex justify-start bg-black'>
                 {user.username}
-            </div>
-            <div className='flex flex-col items-center '>
-                <h2 className='text-lg w-full text-center py-2'>Playlists</h2>
-                <div className='flex flex-col h-60 gap-5 w-full overflow-y-scroll rounded-md border-medium border-[#0b7a75]/20 '>
+            </header>
+            <section className='flex flex-col items-center z-10'>
+                <h2 className='text-lg w-full text-center py-2 bg-black'>Playlists</h2>
+                <section className='flex flex-col h-60 gap-5 w-full overflow-y-scroll rounded-md border-medium border-[#0b7a75]/20  z-10 bg-black'>
                     {playlists.length !== 0 ? playlists.map((p, index) => (
                         <Playlist info={p} key={index}></Playlist>
                     )) : (
                         <div></div>
                     )}
-                </div>
+                </section>
                 <Button fullWidth className='bg-black  flex items-center justify-around' onClick={() => setOpenModal(true)}>
                     <Icon className='bg-neutral-900 rounded-md' fontSize={'24px'} icon="material-symbols:add" />
                     <p>Create new</p>
@@ -80,8 +80,8 @@ const Sidebar = () => {
                         <p></p>
                     </ModalContent>
                 </Modal>
-            </div>
-        </div>
+            </section>
+        </aside>
     )
 }
 

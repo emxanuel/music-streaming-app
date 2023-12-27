@@ -2,6 +2,7 @@ import { axiosInstance } from "@/backend";
 import { getUserById } from "./users";
 import React from "react";
 import { TUser } from "@/types";
+import { AxiosError } from "axios";
 
 const login = async (
     username: string,
@@ -13,7 +14,6 @@ const login = async (
             username: username,
             password: password,
         });
-
         if (request.status === 200) {
             if (request.data !== 'user not found'){
                 const user = await getUserById(request.data)
@@ -22,10 +22,11 @@ const login = async (
             }
         }
         else{
+            alert(request.status)
             return false
         }
     } catch (e) {
-        console.log(e);
+        alert((e as AxiosError).config?.url);
         return false
     }
 };

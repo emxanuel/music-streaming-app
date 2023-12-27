@@ -68,7 +68,7 @@ const Search = () => {
 
     return (
         <div className='flex flex-col items-center h-full py-5'>
-            <form className='flex items-center gap-5 flex-col md:w-9/12'>
+            <form className='flex items-center gap-5 flex-col md:w-9/12 w-11/12'>
                 <div className='flex w-full'>
                     <Input fullWidth variant='bordered' ref={searchInput} label='search' onChange={e => setQuery(e.target.value)} />
                     <Link className='flex items-center justify-center w-20' href={{ pathname: 'search', query: { search: query, filter: filter } }}>
@@ -83,7 +83,7 @@ const Search = () => {
                     </Select>
                 </div>
             </form>
-            <div className='md:w-9/12 flex-grow overflow-scroll pb-20'>
+            <div className='md:w-9/12 flex-grow overflow-scroll pb-20 w-full'>
                 {filter === filters.ALL ? songs.length === 0 ? (
                     <div className='flex justify-center py-5'>
                         <h2>No results to show</h2>

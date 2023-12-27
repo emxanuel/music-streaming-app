@@ -5,7 +5,8 @@ const nextConfig = {
             hostname: 'e-cdns-images.dzcdn.net',
             protocol: 'https'
         }]
-    }
+    },
+    
 }
 
 module.exports = nextConfig

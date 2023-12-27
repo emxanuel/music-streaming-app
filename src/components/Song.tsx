@@ -60,13 +60,13 @@ const Song: React.FC<IProps> = ({ data, number }) => {
                         alt='song-image'
                         width={70}
                         height={70}
-                        className='w-[60px] md:w-[70px] aspect-square'
+                        className='w-[50px] md:w-[70px] aspect-square'
                     />
                 ) : (
                     <p>{number}</p>
                 )}
-                <p className='w-2/3 truncate text-center'>
-                    <span>{data.title} - {data.artist.name}</span>
+                <p className='w-2/3 truncate text-center px-5'>
+                    {data.title} - {data.artist.name}
                 </p>
                 <div className='flex'>
                     <Button size='sm' className='bg-transparent' onClick={likeSong}>
@@ -78,7 +78,7 @@ const Song: React.FC<IProps> = ({ data, number }) => {
                     <Modal
                         isOpen={openModal}
                         onClose={() => setOpenModal(false)}
-                        className='flex flex-col items-center py-5'
+                        className='flex flex-col items-center py-5 absolute'
                         size='sm'
                     >
                         <ModalContent>

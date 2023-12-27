@@ -28,19 +28,21 @@ const SongActions: React.FC<IProps> = ({ song }) => {
                 size='md'
                 className='py-6'
             >
-                <ModalContent className='flex flex-col items-center'>
+                <ModalContent className='flex flex-col items-center px-5    '>
                     <h2>Select playlist to add <span className='font-bold'>{song.title} - {song.artist.name}</span></h2>
-                    {playlists.map((playlist) => (
-                        <Button key={playlist._id} className='flex w-full justify-evenly my-2' onClick={() => {
-                            playlist.songs.push(song)
-                            if (playlist._id !== undefined){
-                                updatePlaylist(playlist._id, playlist.songs)
-                            }
-                        }}>
-                            <p>{playlist.name}</p>
-                            <p>{playlist.owner.username}</p>
-                        </Button>
-                    ))}
+                    <div className='w-full h-60 overflow-y-scroll'>
+                        {playlists.map((playlist) => (
+                            <Button key={playlist._id} className='flex w-full justify-evenly my-2' onClick={() => {
+                                playlist.songs.push(song)
+                                if (playlist._id !== undefined) {
+                                    updatePlaylist(playlist._id, playlist.songs)
+                                }
+                            }}>
+                                <p>{playlist.name}</p>
+                                <p>{playlist.owner.username}</p>
+                            </Button>
+                        ))}
+                    </div>
                 </ModalContent>
             </Modal>
         </div>

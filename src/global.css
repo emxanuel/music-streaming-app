@@ -67,3 +67,8 @@ body {
     height: 2px;
     width: 2px;
 }
+
+.no-navbar::-webkit-scrollbar{
+    height: 0px;
+    width: 0px;
+}

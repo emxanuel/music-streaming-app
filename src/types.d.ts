@@ -6,7 +6,8 @@ type TUser = {
     email: string;
     password: string;
     phone: string;
-    likedSongs: TSong[]
+    likedSongs: TSong[];
+    likedArtists: TArtist[];
 };
 
 type TArtist = {
