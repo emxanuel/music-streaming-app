@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IUser } from "../types";
+import e from "express";
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -93,7 +94,10 @@ const addUser = (value: Record<string,  any>) => new UserModel(value)
     .save().then(user => user.toObject())
 const deleteUserById = (id: string) => UserModel.findOneAndDelete({_id: id})
 const updateUserById = (id: string, user: IUser) => UserModel.findByIdAndUpdate(id, user, {new: true})
-const verifyUser = (username: string, password: string) => UserModel.findOne({username: username, password: password})
+const verifyUser = (password: string, username?: string, email?: string) => {
+    if (username) return UserModel.findOne({username: username, password: password})
+    if (email) return email && UserModel.findOne({email: email, password: password})
+}
 
 export { 
     UserModel, 
