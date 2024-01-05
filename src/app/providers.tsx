@@ -7,11 +7,11 @@ import { AudioProvider } from '@/contexts/SongContext'
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
-      <UserProvider>
-        <AudioProvider>
-          {children}
-        </AudioProvider>
-      </UserProvider>
+        <UserProvider>
+          <AudioProvider>
+            {children}
+          </AudioProvider>
+        </UserProvider>
     </NextUIProvider>
   )
 }
