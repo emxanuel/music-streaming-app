@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { redirect } from 'next/navigation'
 import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
 import { clientID } from '@/functions/auth/google'
+import { gapi } from 'gapi-script'
 
 const FormLogin = () => {
     const router = useRouter()
@@ -60,6 +61,17 @@ const FormLogin = () => {
             }
         })
     }
+
+    useEffect(() => {
+        const start = () => {
+            gapi.auth2.getAuthInstance({
+                clientId: clientID,
+                scope: ''
+            })
+        }
+
+        gapi.load('client:auth2', start)
+    }, [])
 
     return (
         <div className='flex border items-center rounded-md'>

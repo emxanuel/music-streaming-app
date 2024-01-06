@@ -82,7 +82,7 @@ const FormRegister = () => {
 
     useEffect(() => {
         const start = () => {
-            gapi.auth2.init({
+            gapi.auth2.getAuthInstance({
                 clientId: clientID,
                 scope: ''
             })
