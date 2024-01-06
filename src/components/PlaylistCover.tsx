@@ -11,7 +11,6 @@ const PlaylistCover: React.FC<Props> = ({ color, shape }) => {
         '#23395B',
         '#0C8346'
     ]
-    console.log(shape)
     return (
         shape === 0 ? (
             <div className='opacity-50'>

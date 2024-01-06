@@ -50,7 +50,6 @@ const FormRegister = () => {
     }
 
     const handleSubmit = () => {
-        console.log('first')
         if (confirmPassword()) {
             addUser(form, setMessage)
         }
