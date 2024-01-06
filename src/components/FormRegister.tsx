@@ -1,24 +1,17 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Input, Button, Link, Select, SelectItem, Modal, ModalContent } from '@nextui-org/react'
-import { Icon } from '@iconify/react/dist/iconify.js'
+import { Input, Button, Link, Modal, ModalContent } from '@nextui-org/react'
 import { addUser } from '@/functions/api/users'
 import { useUserContext } from '@/contexts/UserContext'
 import { redirect } from 'next/navigation'
 import { gapi } from 'gapi-script'
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login'
-import { useRouter } from 'next/navigation'
-import { AuthAction } from '@/functions/auth/google'
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import { TUser } from '@/types'
-import { login } from '@/functions/api/auth'
 import { clientID } from '@/functions/auth/google'
+import dynamic from 'next/dynamic'
 
 const FormRegister = () => {
-    const { user, setUser } = useUserContext()
-    const router = useRouter()
-    const [gUsername, setGUSername] = useState('')
+    const { user } = useUserContext()
     const [gData, setGData] = useState({
         firstName: '',
         lastName: '',
@@ -69,6 +62,25 @@ const FormRegister = () => {
         }
     }
 
+    const googleSuccess = (
+        response: GoogleLoginResponse,
+    ) => {
+        setGData({
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName,
+            email: response.profileObj.email,
+            password: response.profileObj.googleId,
+            username: ''
+        })
+        setIsModalOpen(true)
+
+        // addUser(data, setMessage)
+    };
+
+    useEffect(() => {
+        addUser(gData, setMessage)
+    }, [gData])
+
     useEffect(() => {
         const start = () => {
             gapi.auth2.init({
@@ -80,31 +92,11 @@ const FormRegister = () => {
         gapi.load('client:auth2', start)
     }, [])
 
-    const googleSuccess = (
-        response: GoogleLoginResponse,
-    ) => {
-        setGData({
-            firstName: response.profileObj.givenName,
-            lastName: response.profileObj.familyName,
-            email: response.profileObj.email,
-            password: response.profileObj.googleId,
-            username: gUsername
-        })
-        setIsModalOpen(true)
-        
-        // addUser(data, setMessage)
-    };
-
-    useEffect(() => {
-        addUser(gData, setMessage)
-    }, [gData])
-
     return (
         <div className='flex border items-center flex-col-reverse md:flex-row rounded-md'>
+            
             <div className='md:w-96 items-center flex flex-col justify-center'>
-                {/* <Button className='duration-150 hover:bg-default-500 h-12' onClick={() => signup()}>
-                <span className='flex items-center gap-4 text-lg'><Icon icon={'logos:google-icon'} />Sign in with Google</span>
-            </Button> */}
+                
                 <GoogleLogin
                     clientId={clientID}
                     onSuccess={(res) => googleSuccess(res as GoogleLoginResponse)}
@@ -140,7 +132,7 @@ const FormRegister = () => {
                         name='username'
                         type='text'
                         label='username'
-                        isRequired />
+                        isRequired />   
                     <Button size='md' onClick={() => {
                         const input = document.getElementById('g-username') as HTMLInputElement
                         setGData({
@@ -157,4 +149,6 @@ const FormRegister = () => {
     )
 }
 
-export default FormRegister
+export default dynamic(() => Promise.resolve(FormRegister), {
+    ssr: false
+})

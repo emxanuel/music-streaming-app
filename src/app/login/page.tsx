@@ -1,4 +1,4 @@
-import FormLogin from "./FormLogin"
+import FormLogin from "@/components/FormLogin"
 import { metadata } from "../layout"
 const Login = () => {
     metadata.title = 'Login | SoundWave'

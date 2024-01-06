@@ -1,5 +1,5 @@
-import FormRegister from './FormRegister'
 import { metadata } from '../layout'
+import FormRegister from '@/components/FormRegister'
 
 const Register = () => {
     metadata.title = 'Register | SoundWave'

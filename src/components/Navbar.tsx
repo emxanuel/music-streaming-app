@@ -35,7 +35,7 @@ const Navbar = () => {
             <NavbarContent className='hidden md:flex md:justify-center items-center justify-center gap-40'>
                 {
                     menuItems.map(i => (
-                        <NavbarItem key={i.title}><Link href={i.href} className='bgBlue py-2 text-lg px-5 rounded-md'>{i.title}</Link></NavbarItem>
+                        <NavbarItem key={i.title}><Link prefetch={false} href={i.href} className='bgBlue py-2 text-lg px-5 rounded-md'>{i.title}</Link></NavbarItem>
                     ))
                 }
             </NavbarContent>
@@ -45,7 +45,7 @@ const Navbar = () => {
                 }}>Home</Link></NavbarItem>
                 {
                     menuItems.map(i => (
-                        <NavbarItem key={i.title}><Link href={i.href} className='bgBlue py-2 text-lg px-5 rounded-md' onClick={() => {
+                        <NavbarItem key={i.title}><Link prefetch={false} href={i.href} className='bgBlue py-2 text-lg px-5 rounded-md' onClick={() => {
                             setIsMenuOpen(false)
                         }}>{i.title}</Link></NavbarItem>
                     ))
