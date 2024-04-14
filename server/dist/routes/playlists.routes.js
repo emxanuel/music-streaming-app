@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.playlistsRouter = void 0;
+const express_1 = require("express");
+const playlists_middlewares_1 = require("../middlewares/playlists.middlewares");
+const playlistsRouter = (0, express_1.Router)();
+exports.playlistsRouter = playlistsRouter;
+playlistsRouter.get("/:id", playlists_middlewares_1.getSinglePlaylist);
+playlistsRouter.post("/", playlists_middlewares_1.createPlaylist);
+playlistsRouter.put("/:id", playlists_middlewares_1.updatePlaylistById);
+playlistsRouter.delete("/:id", playlists_middlewares_1.deletePlaylistById);
+playlistsRouter.get("/user/:userId", playlists_middlewares_1.getPlaylistsByUser);

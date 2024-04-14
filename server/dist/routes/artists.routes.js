@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.artistsRouter = void 0;
+const express_1 = require("express");
+const artists_middlewares_1 = require("../middlewares/artists.middlewares");
+const artistsRouter = (0, express_1.Router)();
+exports.artistsRouter = artistsRouter;
+artistsRouter.get("/:id", artists_middlewares_1.getArtist);
+artistsRouter.get("/:id/:limit/songs", artists_middlewares_1.getArtistSongs);
+artistsRouter.get("/:id/:limit/related", artists_middlewares_1.getRelatedArtists);
+artistsRouter.get("/:id/albums", artists_middlewares_1.getArtistAlbums);
+artistsRouter.put("/user/:id/like", artists_middlewares_1.likeArtist);
+artistsRouter.put("/user/:id/unlike", artists_middlewares_1.unlikeArtist);

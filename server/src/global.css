@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0b7a75;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.blueGradient {
+    background: hsla(177, 100%, 41%, 1);
+
+    background: linear-gradient(
+        225deg,
+        hsla(177, 100%, 41%, 1) 0%,
+        hsla(237, 62%, 44%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+        225deg,
+        hsla(177, 100%, 41%, 1) 0%,
+        hsla(237, 62%, 44%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+        225deg,
+        hsla(177, 100%, 41%, 1) 0%,
+        hsla(237, 62%, 44%, 1) 100%
+    );
+}
+
+.thin-navbar::-webkit-scrollbar{
+    height: 2px;
+    width: 2px;
+}
+
+.no-navbar::-webkit-scrollbar{
+    height: 0px;
+    width: 0px;
+}
